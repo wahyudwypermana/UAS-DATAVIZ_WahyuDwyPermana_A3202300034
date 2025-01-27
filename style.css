@@ -1,0 +1,65 @@
+/* Background and Text */
+body {
+  background-color: #ffffff; /* Warna putih untuk latar */
+  color: #b22222; /* Warna merah untuk teks */
+}
+
+/* Sidebar */
+#wrapper #sidebar {
+  background-color: #b22222; /* Warna merah untuk sidebar */
+  color: #ffffff; /* Warna putih untuk teks sidebar */
+}
+
+#wrapper #sidebar a {
+  color: #ffffff; /* Warna putih untuk link */
+}
+
+#wrapper #sidebar a:hover {
+  color: #ffcccc; /* Warna hover link lebih terang */
+}
+
+/* Header */
+header {
+  background-color: #b22222; /* Warna merah untuk header */
+  color: #ffffff; /* Warna putih untuk teks header */
+}
+
+/* Main Content */
+main {
+  background-color: #ffffff; /* Warna putih untuk konten utama */
+  color: #b22222; /* Warna merah untuk teks */
+}
+
+main h1, main h2, main h3, main h4, main h5, main h6 {
+  color: #b22222; /* Warna merah untuk judul */
+}
+
+/* Code Blocks */
+pre {
+  background-color: #ffcccc; /* Warna merah muda untuk latar kode */
+  color: #b22222; /* Warna teks kode */
+  border: 1px solid #b22222; /* Border merah */
+}
+
+code {
+  background-color: #ffe5e5; /* Warna lebih terang untuk inline code */
+  color: #b22222; /* Warna merah untuk teks */
+}
+
+/* Buttons */
+button {
+  background-color: #b22222; /* Warna merah untuk tombol */
+  color: #ffffff; /* Warna putih untuk teks tombol */
+  border: none;
+}
+
+button:hover {
+  background-color: #ff4d4d; /* Warna hover lebih terang */
+  color: #ffffff;
+}
+
+/* Footer */
+footer {
+  background-color: #b22222; /* Warna merah untuk footer */
+  color: #ffffff; /* Warna putih untuk teks footer */
+}

@@ -1,0 +1,235 @@
+---
+title: "UAS Data Visualization" 
+author: "Wahyu Dwy Permana-A3202300034-Institut Teknologi Statistika dan Bisnis Muhammadiyah"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    theme: flatly
+    css: style.css
+    higlight: zenburn
+    toc: true
+    toc_float:
+      collapsed: true
+    df_print: paged
+bibliography: references.bib
+---
+
+```{=html}
+<style>
+body{
+text-align: justify}
+</style>
+```
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+library(readr)
+Data <- read_csv("Data.csv")
+View(Data)
+```
+
+
+# 1 Judul: Distribusi Angka Harapan Hidup
+Tahapan untuk Menyusun Grafik:
+
+1.Gunakan library ggplot2 untuk membuat visualisasi.
+
+2.Gunakan fungsi ggplot() untuk memetakan variabel Angka_Harapan_Hidup pada sumbu X.
+
+3.Tambahkan layer geom_histogram() untuk membuat histogram.
+
+4.Tentukan parameter binwidth, fill, dan color untuk estetika.
+
+5.Gunakan labs() untuk menambahkan judul dan label sumbu.
+
+Label Sumbu:
+
+X: Angka Harapan Hidup
+
+Y: Frekuensi
+
+Interpretasi Grafik:
+Histogram ini menunjukkan distribusi angka harapan hidup di dataset. Rentang nilai Angka_Harapan_Hidup dibagi menjadi interval dengan lebar 5. Dari grafik ini, kita dapat melihat rentang nilai yang paling sering muncul. Contoh: Jika rentang 70-75 memiliki puncak tertinggi, maka mayoritas negara memiliki angka harapan hidup di rentang tersebut.
+
+
+```{r}
+library(ggplot2)
+
+# Membuat histogram
+ggplot(Data, aes(x = Angka_Harapan_Hidup)) +
+  geom_histogram(binwidth = 5, fill = "skyblue", color = "black") +
+  labs(
+    title = "Distribusi Angka Harapan Hidup",
+    x = "Angka Harapan Hidup",
+    y = "Frekuensi"
+  ) +
+  theme_minimal()
+
+```
+
+# 2 Judul: Rata-rata Angka Harapan Hidup per Benua
+Tahapan untuk Menyusun Grafik:
+
+1 Pemetaan Data: aes(x = Benua, y = Angka_Harapan_Hidup): Memetakan Benua pada sumbu X dan Angka_Harapan_Hidup pada sumbu Y.Gunakan fill = Benua untuk memberikan warna berbeda pada setiap kategori benua.
+
+2 Statistik: stat_summary(fun = "mean", geom = "bar"): Menampilkan rata-rata Angka_Harapan_Hidup untuk setiap benua dalam bentuk bar.
+
+3 Visualisasi: geom = "bar" untuk menampilkan grafik batang. width = 0.6 untuk mengatur lebar batang agar lebih rapi.
+
+4 Label dan Judul: Gunakan labs() untuk menambahkan judul dan label sumbu yang relevan.
+
+5 Estetika: Warna batang diatur berdasarkan benua menggunakan parameter fill.
+.
+
+Label Sumbu:
+
+X: Benua
+
+Y: Rata-rata Angka Harapan Hidup
+
+Interpretasi Grafik:
+Grafik ini menampilkan rata-rata angka harapan hidup untuk setiap benua.
+Perbandingan antar batang memudahkan identifikasi benua dengan angka harapan hidup tertinggi dan terendah.
+Contoh: Jika benua dengan batang tertinggi adalah Eropa, berarti benua ini memiliki rata-rata angka harapan hidup tertinggi dibandingkan benua lain.
+
+```{r}
+ggplot(Data, aes(x = Benua, y = Angka_Harapan_Hidup, fill = Benua)) +
+  stat_summary(fun = "mean", geom = "bar", width = 0.6) +
+  labs(
+    title = "Rata-rata Angka Harapan Hidup per Benua",
+    x = "Benua",
+    y = "Rata-rata Angka Harapan Hidup",
+    fill = "Benua"
+  ) +
+  theme_minimal()
+
+```
+
+# 3 3D Scatter Plot: Pendapatan, Angka Harapan Hidup, dan Populasi
+
+Penjelasan Tahapan :
+
+1. Menggunakan plot_ly():
+x = ~Pendapatan_per_kapita: Data sumbu X adalah Pendapatan per Kapita.
+
+y = ~Angka_Harapan_Hidup: Data sumbu Y adalah Angka Harapan Hidup.
+
+z = ~Populasi: Data sumbu Z adalah Populasi.
+
+color = ~Benua: Warna titik ditentukan oleh kategori benua.
+
+2. Interaktivitas:
+text: Tooltip menampilkan informasi tambahan saat titik diklik atau diarahkan dengan kursor.
+
+Anda dapat menyertakan informasi penting seperti nama negara, populasi, dan pendapatan.
+
+3. Parameter Grafik:
+type = "scatter3d": Menentukan tipe grafik sebagai 3D scatter plot.
+
+mode = "markers": Menggunakan marker (titik) untuk merepresentasikan data.
+
+marker = list(size = 5, opacity = 0.7): Menyesuaikan ukuran dan transparansi titik.
+
+4. Layout:
+layout(): Menambahkan judul dan label pada sumbu X, Y, dan Z.
+
+scene: Menentukan pengaturan untuk sumbu 3D.
+
+Interpretasi Grafik:
+Grafik ini menunjukkan hubungan antara Pendapatan per Kapita, Angka Harapan Hidup, dan Populasi.
+
+Sumbu X: Pendapatan per Kapita (kekayaan rata-rata per orang di suatu negara).
+
+Sumbu Y: Angka Harapan Hidup (indikator kesehatan dan kualitas hidup).
+
+Sumbu Z: Populasi (jumlah total penduduk negara).
+
+Warna titik menunjukkan benua masing-masing negara, memudahkan analisis per kawasan.
+```{r}
+library(plotly)
+
+fig <- plot_ly(
+  data = Data,
+  x = ~Pendapatan_per_kapita,
+  y = ~Angka_Harapan_Hidup,
+  z = ~Populasi,
+  type = "scatter3d",
+  mode = "markers",
+  color = ~Benua,
+  marker = list(size = 5, opacity = 0.7),
+  text = ~paste(
+    "Negara:", Negara,
+    "<br>Pendapatan per Kapita:", Pendapatan_per_kapita,
+    "<br>Angka Harapan Hidup:", Angka_Harapan_Hidup,
+    "<br>Populasi:", Populasi
+  )
+)
+
+fig <- fig %>%
+  layout(
+    title = "3D Scatter Plot: Pendapatan, Angka Harapan Hidup, dan Populasi",
+    scene = list(
+      xaxis = list(title = "Pendapatan per Kapita"),
+      yaxis = list(title = "Angka Harapan Hidup"),
+      zaxis = list(title = "Populasi")
+    )
+  )
+
+fig
+
+```
+
+
+
+
+```{r}
+library(plotly)
+
+fig <- plot_ly(
+  data = Data,
+  x = ~Pendapatan_per_kapita,
+  y = ~Angka_Harapan_Hidup,
+  type = 'scatter',
+  mode = 'markers',
+  color = ~Benua,
+  size = ~Populasi,
+  text = ~paste("Negara:", Negara, "<br>Populasi:", Populasi)
+)
+
+fig <- fig %>%
+  layout(
+    title = "Scatter Plot Interaktif: Pendapatan per Kapita vs Angka Harapan Hidup",
+    xaxis = list(title = "Pendapatan per Kapita"),
+    yaxis = list(title = "Angka Harapan Hidup")
+  )
+
+fig
+
+```
+
+
+
+# R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents [@deCarvalho2012]. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+# Referensi
