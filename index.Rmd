@@ -27,9 +27,12 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r}
 library(readr)
-Data <- read_csv("Data.csv")
+Data <- read_csv("Data.csv", show_col_types = FALSE)
 View(Data)
 ```
+Menampilkan Data CSV
+
+![Foto](Foto.png)
 
 
 # 1 Judul: Distribusi Angka Harapan Hidup
@@ -148,8 +151,9 @@ Sumbu Y: Angka Harapan Hidup (indikator kesehatan dan kualitas hidup).
 Sumbu Z: Populasi (jumlah total penduduk negara).
 
 Warna titik menunjukkan benua masing-masing negara, memudahkan analisis per kawasan.
+
 ```{r}
-library(plotly)
+suppressPackageStartupMessages(library(plotly))
 
 fig <- plot_ly(
   data = Data,
@@ -187,27 +191,25 @@ fig
 
 ```{r}
 library(plotly)
+options(warn = -1)
 
-fig <- plot_ly(
-  data = Data,
-  x = ~Pendapatan_per_kapita,
-  y = ~Angka_Harapan_Hidup,
-  type = 'scatter',
-  mode = 'markers',
-  color = ~Benua,
-  size = ~Populasi,
-  text = ~paste("Negara:", Negara, "<br>Populasi:", Populasi)
-)
-
-fig <- fig %>%
-  layout(
-    title = "Scatter Plot Interaktif: Pendapatan per Kapita vs Angka Harapan Hidup",
-    xaxis = list(title = "Pendapatan per Kapita"),
-    yaxis = list(title = "Angka Harapan Hidup")
-  )
+fig <- plot_ly(Data, 
+               x = ~Pendapatan_per_kapita, 
+               y = ~Angka_Harapan_Hidup, 
+               size = ~Populasi, 
+               color = ~Benua, 
+               frame = ~Tahun, 
+               text = ~paste("Negara:", Negara, 
+                             "<br>Pendapatan:", Pendapatan_per_kapita, 
+                             "<br>Harapan Hidup:", Angka_Harapan_Hidup, 
+                             "<br>Populasi:", Populasi),
+               type = 'scatter', 
+               mode = 'markers') %>% 
+  layout(title = "Perubahan Multivariat dari Tahun ke Tahun",
+         xaxis = list(title = "Pendapatan Per Kapita"),
+         yaxis = list(title = "Angka Harapan Hidup"))
 
 fig
-
 ```
 
 
