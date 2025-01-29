@@ -35,7 +35,8 @@ Menampilkan Data CSV
 ![Foto](Foto.png)
 
 
-# 1 Judul: Distribusi Angka Harapan Hidup
+# 1  Univariat
+Judul: Distribusi Angka Harapan Hidup
 Tahapan untuk Menyusun Grafik:
 
 1.Gunakan library ggplot2 untuk membuat visualisasi.
@@ -73,7 +74,8 @@ ggplot(Data, aes(x = Angka_Harapan_Hidup)) +
 
 ```
 
-# 2 Judul: Rata-rata Angka Harapan Hidup per Benua
+# 2 Bivariat
+Judul: Rata-rata Angka Harapan Hidup per Benua
 Tahapan untuk Menyusun Grafik:
 
 1 Pemetaan Data: aes(x = Benua, y = Angka_Harapan_Hidup): Memetakan Benua pada sumbu X dan Angka_Harapan_Hidup pada sumbu Y.Gunakan fill = Benua untuk memberikan warna berbeda pada setiap kategori benua.
@@ -111,7 +113,8 @@ ggplot(Data, aes(x = Benua, y = Angka_Harapan_Hidup, fill = Benua)) +
 
 ```
 
-# 3 3D Scatter Plot: Pendapatan, Angka Harapan Hidup, dan Populasi
+# 3 Mltivariat 
+3D Scatter Plot: Pendapatan, Angka Harapan Hidup, dan Populasi
 
 Penjelasan Tahapan :
 
@@ -186,8 +189,48 @@ fig
 
 ```
 
+# Interaktif 
 
+Judul : Perubahan Dari Tahun Ke Tahun
 
+Penjelasan Tahapan :
+
+1 Memuat Library : library(plotly)
+
+2 Menonaktifkan Peringatan (Opsional) : options(warn = -1)
+
+3 Membuat Plot Interaktif dengan plot_ly() : fig <- plot_ly(Data,
+
+4 Menentukan Sumbu X dan Y : x = ~Pendapatan_per_kapita, 
+y = ~Angka_Harapan_Hidup, 
+
+5 Menambahkan Variabel Tambahan untuk Analisis Multivariat :size = ~Populasi, 
+color = ~Benua, 
+frame = ~Tahun,
+
+6 Menambahkan Informasi Tambahan pada Titik Data : text = ~paste("Negara:", Negara, 
+              "<br>Pendapatan:", Pendapatan_per_kapita, 
+              "<br>Harapan Hidup:", Angka_Harapan_Hidup, 
+              "<br>Populasi:", Populasi),
+              
+7 Menentukan Tipe dan Mode Grafik : type = 'scatter', 
+mode = 'markers'
+
+8 Menyesuaikan Tata Letak (layout()) : layout(title = "Perubahan Multivariat dari Tahun ke Tahun",
+       xaxis = list(title = "Pendapatan Per Kapita"),
+       yaxis = list(title = "Angka Harapan Hidup"))
+       
+9 Menampilkan Grafik : fig
+
+Interpretasi Grafik :
+
+Grafik ini adalah animasi interaktif yang menampilkan perubahan hubungan antara Pendapatan per Kapita dan Angka Harapan Hidup dari waktu ke waktu.
+
+Setiap titik mewakili sebuah negara, dengan:
+Ukuran titik menunjukkan populasi negara tersebut.
+Warna titik menunjukkan benua asal negara tersebut.
+
+Pengguna dapat melihat perkembangan indikator ekonomi dan kesehatan seiring waktu dengan menggerakkan animasi berdasarkan variabel Tahun.
 
 ```{r}
 library(plotly)
@@ -212,26 +255,44 @@ fig <- plot_ly(Data,
 fig
 ```
 
+# Kesimpulan dari Visualisasi Data dalam R
+
+Dari beberapa visualisasi yang telah dibuat menggunakan ggplot2 dan plotly, kita dapat mengambil beberapa kesimpulan mengenai hubungan antara Angka Harapan Hidup, Pendapatan per Kapita, Populasi, dan Benua.  
+
+1. Histogram: Distribusi Angka Harapan Hidup  
+(Kode 1: ggplot Histogram)
+- Histogram membantu kita melihat distribusi angka harapan hidup di berbagai negara dan tahun.  
+- Dari visualisasi ini, kita dapat mengetahui apakah angka harapan hidup terdistribusi normal atau cenderung miring ke kiri/kanan.  
+- Binwidth = 5 digunakan untuk mengelompokkan data dengan interval 5 tahun agar lebih mudah dianalisis.  
+
+2. Bar Chart: Rata-rata Angka Harapan Hidup per Benua
+(Kode 2: ggplot Bar Chart)
+- Visualisasi ini menunjukkan rata-rata angka harapan hidup di setiap benua.  
+- Dengan menggunakan `stat_summary(fun = "mean")`, kita dapat membandingkan angka harapan hidup antar-benua.  
+- Warna pada grafik juga membantu membedakan masing-masing benua dengan lebih jelas.  
+- Dari grafik ini, kita dapat melihat apakah ada benua dengan angka harapan hidup yang jauh lebih tinggi atau rendah dibandingkan yang lain.  
+
+3. 3D Scatter Plot: Hubungan Pendapatan, Angka Harapan Hidup, dan Populasi
+(Kode 3: plotly Scatter 3D)
+- Grafik ini menggunakan sumbu X (Pendapatan per Kapita), sumbu Y (Angka Harapan Hidup), dan sumbu Z (Populasi).  
+- Dengan menambahkan warna berdasarkan benua, kita dapat melihat apakah ada pola tertentu antar-benua.  
+- Dari grafik ini, kita dapat melihat bahwa negara dengan pendapatan lebih tinggi cenderung memiliki angka harapan hidup lebih tinggi.  
+- Ukuran titik tidak ditentukan oleh variabel lain, tetapi tetap seragam dengan `size = 5`.  
+
+4. Animated Scatter Plot: Perubahan Multivariat dari Tahun ke Tahun
+(Kode 4: plotly Animated Scatter Plot)  
+- Visualisasi ini menampilkan perubahan angka harapan hidup dan pendapatan per kapita secara dinamis dari tahun ke tahun.  
+- Ukuran titik melambangkan populasi, sehingga kita dapat melihat bagaimana negara-negara dengan populasi besar berkembang dari waktu ke waktu.  
+- Dengan animasi berbasis tahun (`frame = ~Tahun`), kita bisa melihat tren perkembangan angka harapan hidup dan ekonomi di seluruh dunia.  
+
+---
+
+Kesimpulan Umum 
+
+Angka harapan hidup cenderung meningkat seiring dengan bertambahnya pendapatan per kapita.  
+Ada variasi angka harapan hidup antar benua, yang dapat menunjukkan perbedaan dalam akses layanan kesehatan dan kondisi sosial-ekonomi.  
+Negara-negara dengan populasi besar sering kali memiliki angka harapan hidup yang bervariasi, tergantung pada wilayah dan faktor sosial.  
+Visualisasi animasi sangat membantu untuk melihat tren perubahan dari waktu ke waktu, terutama dalam studi pertumbuhan global.  
 
 
-# R Markdown
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents [@deCarvalho2012]. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
-
-# Referensi

@@ -1,65 +1,65 @@
 /* Background and Text */
 body {
-  background-color: #ffffff; /* Warna putih untuk latar */
-  color: #b22222; /* Warna merah untuk teks */
+  background-color: #F5F5F5; /* Abu-abu terang untuk latar belakang */
+  color: #2C3E50; /* Biru tua untuk teks utama */
 }
 
 /* Sidebar */
 #wrapper #sidebar {
-  background-color: #b22222; /* Warna merah untuk sidebar */
-  color: #ffffff; /* Warna putih untuk teks sidebar */
+  background-color: #34495E; /* Biru-abu gelap untuk sidebar */
+  color: #F5F5F5; /* Abu-abu terang untuk teks sidebar */
 }
 
 #wrapper #sidebar a {
-  color: #ffffff; /* Warna putih untuk link */
+  color: #F39C12; /* Oranye untuk link */
 }
 
 #wrapper #sidebar a:hover {
-  color: #ffcccc; /* Warna hover link lebih terang */
+  color: #E67E22; /* Oranye lebih terang untuk hover */
 }
 
 /* Header */
 header {
-  background-color: #b22222; /* Warna merah untuk header */
-  color: #ffffff; /* Warna putih untuk teks header */
+  background-color: #34495E; /* Biru-abu gelap untuk header */
+  color: #F5F5F5; /* Abu-abu terang untuk teks header */
 }
 
 /* Main Content */
 main {
-  background-color: #ffffff; /* Warna putih untuk konten utama */
-  color: #b22222; /* Warna merah untuk teks */
+  background-color: #FFFFFF; /* Putih untuk konten utama */
+  color: #2C3E50; /* Biru tua untuk teks */
 }
 
 main h1, main h2, main h3, main h4, main h5, main h6 {
-  color: #b22222; /* Warna merah untuk judul */
+  color: #2C3E50; /* Biru tua untuk judul */
 }
 
 /* Code Blocks */
 pre {
-  background-color: #ffcccc; /* Warna merah muda untuk latar kode */
-  color: #b22222; /* Warna teks kode */
-  border: 1px solid #b22222; /* Border merah */
+  background-color: #D5DBDB; /* Abu-abu lembut untuk latar kode */
+  color: #2C3E50; /* Biru tua untuk teks kode */
+  border: 1px solid #34495E; /* Border biru-abu gelap */
 }
 
 code {
-  background-color: #ffe5e5; /* Warna lebih terang untuk inline code */
-  color: #b22222; /* Warna merah untuk teks */
+  background-color: #EAEDED; /* Abu-abu lebih terang untuk inline code */
+  color: #2C3E50; /* Biru tua untuk teks */
 }
 
 /* Buttons */
 button {
-  background-color: #b22222; /* Warna merah untuk tombol */
-  color: #ffffff; /* Warna putih untuk teks tombol */
+  background-color: #F39C12; /* Oranye untuk tombol */
+  color: #FFFFFF; /* Putih untuk teks tombol */
   border: none;
 }
 
 button:hover {
-  background-color: #ff4d4d; /* Warna hover lebih terang */
-  color: #ffffff;
+  background-color: #E67E22; /* Warna oranye lebih terang untuk hover */
+  color: #FFFFFF;
 }
 
 /* Footer */
 footer {
-  background-color: #b22222; /* Warna merah untuk footer */
-  color: #ffffff; /* Warna putih untuk teks footer */
+  background-color: #34495E; /* Biru-abu gelap untuk footer */
+  color: #F5F5F5; /* Abu-abu terang untuk teks footer */
 }
